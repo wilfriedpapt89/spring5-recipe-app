@@ -8,7 +8,7 @@ public class UnitOfMeasure {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String descritpion;
+    private String description;
 
     public Long getId() {
         return id;
@@ -18,11 +18,19 @@ public class UnitOfMeasure {
         this.id = id;
     }
 
-    public String getDescritpion() {
-        return descritpion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescritpion(String descritpion) {
-        this.descritpion = descritpion;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "UnitOfMeasure{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
