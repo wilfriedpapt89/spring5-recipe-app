@@ -4,6 +4,7 @@ import com.wilfried.spring5recipeapp.domain.*;
 import com.wilfried.spring5recipeapp.repositories.CategoryRepository;
 import com.wilfried.spring5recipeapp.repositories.RecipeRepository;
 import com.wilfried.spring5recipeapp.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@Slf4j
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private final RecipeRepository recipeRepository;
@@ -109,9 +111,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
                 "Read more: http://www.simplyrecipes.com/recipes/perfect_guacamole/#ixzz4jvoun5ws");
 
         // adding ingredients to recipe
-        guacRecipe.getIngredients().add(new Ingredient("ripe avocados", new BigDecimal(2), guacRecipe, eachUomOptional.get()));
-        guacRecipe.getIngredients().add(new Ingredient("Kosher salt", new BigDecimal(".5"),guacRecipe, teaSpoonUomOptional.get()));
-        guacRecipe.getIngredients().add(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2),guacRecipe, tableSpoonUomOptional.get()));
+        guacRecipe.addIngredients(new Ingredient("ripe avocados", new BigDecimal(2), eachUomOptional.get()));
+        guacRecipe.addIngredients(new Ingredient("Kosher salt", new BigDecimal(".5"),teaSpoonUomOptional.get()));
+        guacRecipe.addIngredients(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2),tableSpoonUomOptional.get()));
         guacRecipe.setNotes(guacNotes);
         guacNotes.setRecipe(guacRecipe);
         recipes.add(guacRecipe);
@@ -120,6 +122,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        log.debug("Loading bootstrap data");
         recipeRepository.saveAll(getRecipes());
     }
 }
