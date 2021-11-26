@@ -115,6 +115,9 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         guacRecipe.addIngredients(new Ingredient("Kosher salt", new BigDecimal(".5"),teaSpoonUomOptional.get()));
         guacRecipe.addIngredients(new Ingredient("fresh lime juice or lemon juice", new BigDecimal(2),tableSpoonUomOptional.get()));
         guacRecipe.setNotes(guacNotes);
+        guacRecipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
+        guacRecipe.setSource("Simple recipes");
+        guacRecipe.setServings(4);
         guacNotes.setRecipe(guacRecipe);
         recipes.add(guacRecipe);
         return recipes;
