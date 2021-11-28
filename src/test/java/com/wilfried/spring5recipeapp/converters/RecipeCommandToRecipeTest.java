@@ -49,6 +49,7 @@ class RecipeCommandToRecipeTest {
 
     @Test
     void testWithEmptyObject() {
+
         assertNotNull(recipeCommandToRecipe.convert(new RecipeCommand()));
     }
 
