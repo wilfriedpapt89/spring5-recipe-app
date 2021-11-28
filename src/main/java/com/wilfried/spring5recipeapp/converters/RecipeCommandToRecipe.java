@@ -19,12 +19,12 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
 
     private final NotesCommandToNotes notesCommandToNotes;
     private final IngredientCommandToIngredient ingredientCommandToIngredient;
-    private final CategoryToCategoryCommand categoryToCategoryCommand;
+    private final CategoryCommandToCategory categoryCommandToCategory;
 
-    public RecipeCommandToRecipe(NotesCommandToNotes notesCommandToNotes, IngredientCommandToIngredient ingredientCommandToIngredient, CategoryToCategoryCommand categoryToCategoryCommand) {
+    public RecipeCommandToRecipe(NotesCommandToNotes notesCommandToNotes, IngredientCommandToIngredient ingredientCommandToIngredient, CategoryCommandToCategory categoryCommandToCategory) {
         this.notesCommandToNotes = notesCommandToNotes;
         this.ingredientCommandToIngredient = ingredientCommandToIngredient;
-        this.categoryToCategoryCommand = categoryToCategoryCommand;
+        this.categoryCommandToCategory = categoryCommandToCategory;
     }
 
     @Synchronized
@@ -54,9 +54,7 @@ public class RecipeCommandToRecipe implements Converter<RecipeCommand, Recipe> {
             recipe.setIngredients(ingredients);
             Set<Category> categories = new HashSet<>();
             for(CategoryCommand categoryCommand : source.getCategories()){
-                Category category = new Category();
-                category.setId(source.getId());
-                category.setDescription(source.getDescription());
+                Category category = categoryCommandToCategory.convert(categoryCommand);
                 categories.add(category);
             }
             recipe.setCategories(categories);
