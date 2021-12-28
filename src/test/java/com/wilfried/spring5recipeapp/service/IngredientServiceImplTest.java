@@ -64,7 +64,5 @@ class IngredientServiceImplTest {
         assertNotNull(ingredientCommand);
         assertEquals(1L, ingredientCommand.getRecipeId());
         assertEquals(3L, ingredientCommand.getId());
-
-
     }
 }
