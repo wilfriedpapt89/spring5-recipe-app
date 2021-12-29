@@ -21,13 +21,18 @@ public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
     public UnitOfMeasureServiceImpl(UnitOfMeasureRepository unitOfMeasureRepository, UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand) {
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.unitOfMeasureToUnitOfMeasureCommand = unitOfMeasureToUnitOfMeasureCommand;
+        System.out.println("Start service ");
     }
 
     @Override
     public Set<UnitOfMeasureCommand> listAllUoms() {
 
+        System.out.println("hashcode of uomTouomCommand " + unitOfMeasureToUnitOfMeasureCommand.hashCode());
        return StreamSupport.stream(unitOfMeasureRepository.findAll().spliterator(), false)
-                .map(unitOfMeasureToUnitOfMeasureCommand::convert)
+                .map(unitOfMeasureToUnitOfMeasureCommand::convert).peek(uomcmd -> {
+                   System.out.println("uomcmd id " + uomcmd.getId());
+                   System.out.println("uomcmd descr " + uomcmd.getDescription());
+               })
                 .collect(Collectors.toSet());
     }
 }
