@@ -1,15 +1,16 @@
-package com.wilfried.spring5recipeapp.commands;
+package com.wilfried.spring5recipeapp.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+public class UnitOfMeasureDto {
 
-
-public class UnitOfMeasureCommand {
     private Long id;
     private String description;
 
-    public UnitOfMeasureCommand() {
+    @Override
+    public String toString() {
+        return "UnitOfMeasureDto{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     public Long getId() {

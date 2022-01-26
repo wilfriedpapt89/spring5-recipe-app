@@ -32,7 +32,7 @@ public class IngredientServiceImpl implements IngredientService {
         Optional<Recipe> optionalRecipe = recipeRepository.findById(recipeId);
 
         if (!optionalRecipe.isPresent()) {
-            log.debug("Recipe id not found: ID: " + recipeId);
+//            log.debug("Recipe id not found: ID: " + recipeId);
             throw new RuntimeException();
         }
 
