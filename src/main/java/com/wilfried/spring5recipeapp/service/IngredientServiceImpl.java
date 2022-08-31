@@ -1,6 +1,7 @@
 package com.wilfried.spring5recipeapp.service;
 
 import com.wilfried.spring5recipeapp.commands.IngredientCommand;
+import com.wilfried.spring5recipeapp.converters.IngredientCommandToIngredient;
 import com.wilfried.spring5recipeapp.converters.IngredientToIngredientCommand;
 import com.wilfried.spring5recipeapp.domain.Ingredient;
 import com.wilfried.spring5recipeapp.domain.Recipe;
@@ -37,9 +38,17 @@ public class IngredientServiceImpl implements IngredientService {
         }
 
         Recipe recipe = optionalRecipe.get();
+        Optional<Ingredient> ingredientCommand = recipe.getIngredients().stream().filter(ingredient -> ingredient.getId().equals(ingredientId)).findFirst();
+        System.out.println(" ===>===> ===> ===> ====> ===> " + ingredientCommand.orElse(new Ingredient()).getId());
+        System.out.println(" ===>===> ===> ===> ====> ===> " + ingredientCommand.orElse(new Ingredient()).getId());
+        System.out.println(" ===>===> ===> ===> ====> ===> " + ingredientCommand.orElse(new Ingredient()).getId());
 
-        Optional<IngredientCommand> optionalIngredientCommand = recipe.getIngredients().stream().filter(ingredient -> ingredient.getId().equals(ingredientId)).map(ingredientToIngredientCommand::convert).findFirst();
-
-        return optionalIngredientCommand.orElse(null);
+        IngredientCommand result = ingredientToIngredientCommand.convert(ingredientCommand.orElse(null));
+//        Optional<IngredientCommand> optionalIngredientCommand = recipe.getIngredients().stream().filter(ingredient -> ingredient.getId().equals(ingredientId)).map(ingredientToIngredientCommand::convert).findFirst();
+//
+//        return optionalIngredientCommand.orElse(null);
+        System.out.println("result est est getRecipeId " + result.getRecipeId());
+        System.out.println("result est est id() " + result.getId());
+        return result;
     }
 }

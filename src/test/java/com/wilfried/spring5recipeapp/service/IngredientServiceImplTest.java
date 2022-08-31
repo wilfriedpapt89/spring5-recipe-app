@@ -39,6 +39,7 @@ class IngredientServiceImplTest {
     @Test
     void findByRecipeIdAndIngredientId() {
 
+        //GIven
         Recipe recipe = new Recipe();
         recipe.setId(1L);
 

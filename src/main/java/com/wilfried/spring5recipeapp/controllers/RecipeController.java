@@ -3,12 +3,15 @@ package com.wilfried.spring5recipeapp.controllers;
 import com.wilfried.spring5recipeapp.commands.RecipeCommand;
 import com.wilfried.spring5recipeapp.domain.Recipe;
 import com.wilfried.spring5recipeapp.service.RecipeService;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller()
 @RequestMapping({"/recipe"})
+@Slf4j
 public class RecipeController {
 
     private final RecipeService recipeService;
@@ -46,6 +49,7 @@ public class RecipeController {
 
     @RequestMapping({"/{id}/delete"})
     public String deleteRecipe(@PathVariable String id, Model model){
+
         recipeService.deleteById(Long.parseLong(id));
         return "redirect:/";
     }
