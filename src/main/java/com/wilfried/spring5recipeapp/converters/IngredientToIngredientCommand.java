@@ -14,22 +14,17 @@ public class IngredientToIngredientCommand implements Converter<Ingredient, Ingr
 
     public IngredientToIngredientCommand(UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand) {
         this.unitOfMeasureToUnitOfMeasureCommand = unitOfMeasureToUnitOfMeasureCommand;
-        System.out.println("============================= instance ");
-        System.out.println("============================= instance ");
-        System.out.println("============================= instance ");
     }
 
     @Synchronized
     @Nullable
     @Override
     public IngredientCommand convert(Ingredient source) {
-        System.out.println("reach the method ");
-        System.out.println("reach the method with " + source.getId());
+
         IngredientCommand ingredientCommand = new IngredientCommand();
         try {
             if (source == null)
                 return null;
-            System.out.println("I'm not null ");
 
             ingredientCommand.setId(source.getId());
             if(source.getRecipe() != null)

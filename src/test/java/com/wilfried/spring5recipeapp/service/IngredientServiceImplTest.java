@@ -1,17 +1,15 @@
 package com.wilfried.spring5recipeapp.service;
 
 import com.wilfried.spring5recipeapp.commands.IngredientCommand;
-import com.wilfried.spring5recipeapp.commands.RecipeCommand;
 import com.wilfried.spring5recipeapp.converters.IngredientToIngredientCommand;
+import com.wilfried.spring5recipeapp.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.wilfried.spring5recipeapp.domain.Ingredient;
 import com.wilfried.spring5recipeapp.domain.Recipe;
 import com.wilfried.spring5recipeapp.repositories.IngredientRepository;
 import com.wilfried.spring5recipeapp.repositories.RecipeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
@@ -22,13 +20,17 @@ class IngredientServiceImplTest {
     @Mock
     IngredientRepository ingredientRepository;
 
-    @Mock
-    IngredientToIngredientCommand ingredientToIngredientCommand;
+
+    private final IngredientToIngredientCommand ingredientToIngredientCommand;
 
     @Mock
     RecipeRepository recipeRepository;
 
     IngredientServiceImpl ingredientServiceImpl;
+
+    IngredientServiceImplTest() {
+        this.ingredientToIngredientCommand = new IngredientToIngredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
+    }
 
     @BeforeEach
     void setUp() {
