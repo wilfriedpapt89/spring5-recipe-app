@@ -14,6 +14,8 @@ import org.mockito.*;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.times;
 
 class IngredientServiceImplTest {
 
@@ -67,5 +69,6 @@ class IngredientServiceImplTest {
         assertNotNull(ingredientCommand);
         assertEquals(1L, ingredientCommand.getRecipeId());
         assertEquals(3L, ingredientCommand.getId());
+        Mockito.verify(recipeRepository, times(1)).findById(anyLong());
     }
 }

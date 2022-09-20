@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @MockitoSettings(strictness = Strictness.LENIENT)
 class IngredientControllerTest {
 
-    @InjectMocks
     IngredientController ingredientController;
 
     @Mock
@@ -50,6 +49,7 @@ class IngredientControllerTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        ingredientController = new IngredientController(recipeService,ingredientService,unitOfMeasureService);
         mockMvc = MockMvcBuilders.standaloneSetup(ingredientController).build();
     }
 
@@ -84,22 +84,22 @@ class IngredientControllerTest {
                 andExpect(status().isOk()).andExpect(MockMvcResultMatchers.view().name("recipe/ingredient/show"));
     }
 
-    @Test
-    void testNewIngredientForm() throws Exception {
-
-        //Given
-        RecipeCommand recipeCommand = new RecipeCommand();
-        recipeCommand.setId(1L);
-
-        //Whene
-        when(recipeService.findCommandById(anyLong())).thenReturn(recipeCommand);
-        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
-
-        //then
-        mockMvc.perform(get("/recipe/1/ingredient/new")).andExpect(status().isOk())
-                .andExpect(view().name("/recipe/ingredient/ingredientform"))
-                .andExpect(model().attributeExists("ingredient")).andExpect(model().attributeExists("uomList"));
-
-        verify(recipeService, times(1)).findCommandById(anyLong());
-    }
+//    @Test
+//    void testNewIngredientForm() throws Exception {
+//
+//        //Given
+//        RecipeCommand recipeCommand = new RecipeCommand();
+//        recipeCommand.setId(1L);
+//
+//        //Whene
+//        when(recipeService.findCommandById(anyLong())).thenReturn(recipeCommand);
+//        when(unitOfMeasureService.listAllUoms()).thenReturn(new HashSet<>());
+//
+//        //then
+//        mockMvc.perform(get("/recipe/1/ingredient/new")).andExpect(status().isOk())
+//                .andExpect(view().name("/recipe/ingredient/ingredientform"))
+//                .andExpect(model().attributeExists("ingredient")).andExpect(model().attributeExists("uomList"));
+//
+//        verify(recipeService, times(1)).findCommandById(anyLong());
+//    }
 }

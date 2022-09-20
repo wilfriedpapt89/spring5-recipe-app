@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 public class UnitOfMeasureToUnitOfMeasureCommand implements Converter<UnitOfMeasure, UnitOfMeasureCommand> {
 
     public UnitOfMeasureToUnitOfMeasureCommand() {
-        System.out.println("+++++++++++++ ++++ constructor ");
     }
 
     @Synchronized

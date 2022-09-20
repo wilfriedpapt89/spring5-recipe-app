@@ -23,17 +23,16 @@ class UnitOfMeasureServiceImplTest {
 
     @Mock
     UnitOfMeasureRepository unitOfMeasureRepository;
-    @Mock
+
     UnitOfMeasureToUnitOfMeasureCommand unitOfMeasureToUnitOfMeasureCommand;
 
-    @InjectMocks
     UnitOfMeasureServiceImpl unitOfMeasureService;
 
     @BeforeEach
     void setUp() {
-        System.out.println("======= setup");
+        unitOfMeasureToUnitOfMeasureCommand = new UnitOfMeasureToUnitOfMeasureCommand();
         MockitoAnnotations.openMocks(this);
-//        unitOfMeasureService = new UnitOfMeasureServiceImpl(unitOfMeasureRepository,unitOfMeasureToUnitOfMeasureCommand);
+       unitOfMeasureService = new UnitOfMeasureServiceImpl(unitOfMeasureRepository,unitOfMeasureToUnitOfMeasureCommand);
     }
 
     @Test
